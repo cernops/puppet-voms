@@ -46,7 +46,10 @@ define voms::server($vo, $server, $port, $dn, $ca_dn) {
       content => template("voms/lsc.erb"),
       require => File["vomsdir"];      
     "vomses_$vo-$server":
-      path    => "/opt/glite/etc/vomses/$vo-$server",
+      path    => $grid_flavour ? {
+        "glite" => "/opt/glite/etc/vomses/$vo-$server",
+        default => "/etc/sysconfig/vomses/$vo-$server",
+      },
       owner   => root,
       group   => root,
       mode    => 644,

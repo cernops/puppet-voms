@@ -11,9 +11,16 @@
 #
 class voms::client {
 
-  package { "glite-security-voms-clients": 
+  package { "voms-clients": 
+    name    => $grid_flavour ? {
+      "glite" => "glite-security-voms-clients",
+      default => "voms-clients",
+    },
     ensure  => latest, 
-    notify  => Exec["glite_ldconfig"],
+    notify  => $grid_flavour ? {
+      "glite" => Exec["glite_ldconfig"],
+      default => undef,
+    },
     require => Package["lcg-CA"],
   }
 

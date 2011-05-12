@@ -26,6 +26,8 @@
 #
 # CERN IT/GT/DMS <it-dep-gt-dms@cern.ch>
 #
+import '*.pp'
+
 class voms {
   file { 
     "vomsdir":
@@ -37,7 +39,10 @@ class voms {
       require => File["/etc/grid-security"];
     "vomses":
       ensure  => directory,
-      path    => "/opt/glite/etc/vomses",
+      path    => $grid_flavour ? {
+        "glite" => "/opt/glite/etc/vomses",
+        default => "/etc/sysconfig/vomses",
+      },
       owner   => root,
       group   => root,
       mode    => 755,
