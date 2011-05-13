@@ -41,11 +41,14 @@ class voms {
       ensure  => directory,
       path    => $grid_flavour ? {
         "glite" => "/opt/glite/etc/vomses",
-        default => "/etc/sysconfig/vomses",
+        default => "/etc/vomses",
       },
       owner   => root,
       group   => root,
       mode    => 755,
-      require => File["glite_etc"],
+      require => $grid_flavour ? {
+        "glite" => File["glite_etc"],
+        default => undef,
+      };
   }
 }

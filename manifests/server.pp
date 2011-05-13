@@ -48,7 +48,7 @@ define voms::server($vo, $server, $port, $dn, $ca_dn) {
     "vomses_$vo-$server":
       path    => $grid_flavour ? {
         "glite" => "/opt/glite/etc/vomses/$vo-$server",
-        default => "/etc/sysconfig/vomses/$vo-$server",
+        default => "/etc/vomses/$vo-$server",
       },
       owner   => root,
       group   => root,
