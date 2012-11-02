@@ -5,18 +5,15 @@
 #
 # == Examples
 # 
-# Simply include this class:
-#   include voms::atlas
+# Simply enable this class:
+#   class{'voms::atlas':}
 #
 # == Authors
 #
 # CERN IT/GT/DMS <it-dep-gt-dms@cern.ch>
-#
+# CERN IT/PS/PES <it-dep-ps-pes@cern.ch>
+
 class voms::atlas {
-  include voms
-
-  voms::vo { "atlas": }
-
   voms::server { 
     "voms_atlas_cern":
       vo     => "atlas",

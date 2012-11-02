@@ -1,5 +1,40 @@
-This module manages VOMS resources (for both clients and servers).
+This module manages VOMS resources for VOMS clients. 
 
 VOMS is the Virtual Organization Membership Service, in use by gLite, EMI, and
 other grid computing projects.
+
+== Examples
+ 
+   voms::server { 
+    "voms_MyVO_cern":
+      vo     => "MyVO",
+      server => "voms.cern.ch",
+      port   => 15001,
+      dn     => ["/DC=ch/DC=cern/OU=computers/CN=voms.cern.ch"],
+      ca_dn  => ["/DC=ch/DC=cern/CN=CERN Trusted Certification Authority"];
+   }
+
+ The above declaration will create the files:
+
+ /etc/vomses/MyVO/voms.cern.ch
+ and
+ /etc/grid-security/vomsdir/MyVO/voms.cern.ch.lsc
+
+
+ For some VOs, you can probably find a predefined class you can enable which
+ does all the required setup without any additional configuration e.g:
+
+   class{'voms::atlas':}
+   or
+   class{'voms::dteam':}
+
+ Additions of new VOs will be accepted.
+
+== Authors
+
+ CERN IT/GT/DMS <it-dep-gt-dms@cern.ch>
+ CERN IT/PS/PES <it-dep-ps-pes@cern.ch>
+
+
+
 
