@@ -5,25 +5,16 @@
 #
 # == Examples
 # 
-# Simply include this class:
-#   include voms::dteam
+# Simply enable this class:
+#   class{'voms::dteam':}
 #
 # == Authors
 #
 # CERN IT/GT/DMS <it-dep-gt-dms@cern.ch>
-#
+# CERN IT/PS/PES <it-dep-ps-pes@cern.ch>
+
 class voms::dteam {
-  include voms
-
-  voms::vo { "dteam": }
-
   voms::server {
-    "voms_dteam_cern":
-      vo     => "dteam",
-      server => "voms.cern.ch",
-      port   => 15001,
-      dn     => ["/DC=ch/DC=cern/OU=computers/CN=voms.cern.ch"],
-      ca_dn  => ["/DC=ch/DC=cern/CN=CERN Trusted Certification Authority"];
     "voms_dteam_greece":
       vo     => "dteam",
       server => "voms.hellasgrid.gr",
@@ -36,18 +27,6 @@ class voms::dteam {
       port   => 15001,
       dn     => ["/C=GR/O=HellasGrid/OU=hellasgrid.gr/CN=voms2.hellasgrid.gr"],
       ca_dn  => ["/C=GR/O=HellasGrid/OU=Certification Authorities/CN=HellasGrid CA 2006"];
-    "voms_dteam_lcg":
-      vo     => "dteam",
-      server => "lcg-voms.cern.ch",
-      port   => 15001,
-      dn     => ["/DC=ch/DC=cern/OU=computers/CN=lcg-voms.cern.ch"],
-      ca_dn  => ["/DC=ch/DC=cern/CN=CERN Trusted Certification Authority"];
-    "voms_dteam_tbed":
-      vo     => "dteam",
-      server => "lxbra2309.cern.ch",
-      port   => 15002,
-      dn     => ["/DC=ch/DC=cern/OU=computers/CN=lxbra2309.cern.ch"],
-      ca_dn  => ["/DC=ch/DC=cern/CN=CERN Trusted Certification Authority"];
   }
 }
 

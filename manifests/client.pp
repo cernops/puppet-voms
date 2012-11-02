@@ -2,8 +2,8 @@
 #
 # == Examples
 # 
-# Simply include this class:
-#   include voms::client
+# Simply enable this class:
+#   class{'voms::client':}
 #
 # == Authors
 #

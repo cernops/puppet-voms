@@ -29,14 +29,46 @@
 #      dn     => ["/DC=ch/DC=cern/OU=computers/CN=voms.cern.ch"],
 #      ca_dn  => ["/DC=ch/DC=cern/CN=CERN Trusted Certification Authority"];
 #
-# Do not forget to also invoke the voms::vo definition to properly setup the
-# required local resources for that VO.
-#
 # == Authors
 #
 # CERN IT/GT/DMS <it-dep-gt-dms@cern.ch>
-#
+# CERN IT/PES/PS <it-dep-pes-ps@cern.ch>
+
 define voms::server($vo, $server, $port, $dn, $ca_dn) {
+
+  $vomsprefix = $grid_flavour ? {
+         "glite" => '/opt/glite/etc/vomses',
+         default => '/etc/vomses'
+  }
+  ensure_resource('file',"${vomsprefix}",
+                     { ensure => directory,
+                       owner  => root,
+                       group  => root,
+                       mode   => 0644,
+                       purge  => true
+                     }
+                 )              
+
+
+  ensure_resource('file',"/etc/grid-security/vomsdir/${vo}",
+                     { ensure => directory,
+                       owner  => root,
+                       group  => root,
+                       mode   => 0644, 
+                       purge  => true,
+                       require => File['/etc/grid-security/vomsdir']
+                     }
+                 )
+  ensure_resource('file','/etc/grid-security/vomsdir',
+                     { ensure => directory,
+                       owner  => root,
+                       group  => root,
+                       mode   => 0644, 
+                       purge  => true,
+                     }
+                 )
+                                   
+
   file { 
     "voms_lsc_$vo-$server":
       path    => "/etc/grid-security/vomsdir/$vo/$server.lsc",
@@ -44,16 +76,14 @@ define voms::server($vo, $server, $port, $dn, $ca_dn) {
       group   => root,
       mode    => 644,
       content => template("voms/lsc.erb"),
-      require => File["vomsdir"];      
-    "vomses_$vo-$server":
-      path    => $grid_flavour ? {
-        "glite" => "/opt/glite/etc/vomses/$vo-$server",
-        default => "/etc/vomses/$vo-$server",
-      },
+      require => File["/etc/grid-security/vomsdir/${vo}"]
+  }
+  file{"vomses_$vo-$server":
+      path    =>  "${vomsprefix}/${vo}-${server}",
       owner   => root,
       group   => root,
       mode    => 644,
       content => template("voms/vomses.erb"),
-      require => File["vomses"];
+      require => File["${vomsprefix}"]
   }
 }
