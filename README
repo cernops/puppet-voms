@@ -5,14 +5,18 @@ other grid computing projects.
 
 == Examples
  
-   voms::server { 
-    "voms_MyVO_cern":
-      vo     => "MyVO",
-      server => "voms.cern.ch",
-      port   => 15001,
-      dn     => ["/DC=ch/DC=cern/OU=computers/CN=voms.cern.ch"],
-      ca_dn  => ["/DC=ch/DC=cern/CN=CERN Trusted Certification Authority"];
-   }
+     voms::client{'MyVO':
+        vo       => 'MyVO',
+        servers  => [{server => 'voms.cern.ch',
+                      port   => '15009',
+                      dn     => '/DC=ch/DC=cern/OU=computers/CN=voms.cern.ch',
+                      ca_dn  => '/DC=ch/DC=cern/CN=CERN Trusted Certification Authority'
+                     },
+                     {server => 'lcg-voms.cern.ch',
+                      port   => '15009',
+                       dn    => '/DC=ch/DC=cern/OU=computers/CN=lcg-voms.cern.ch',
+                       ca_dn => '/DC=ch/DC=cern/CN=CERN Trusted Certification Authority'
+                     }]
 
  The above declaration will create the files:
 
@@ -34,7 +38,7 @@ other grid computing projects.
 
  CERN IT/GT/DMS <it-dep-gt-dms@cern.ch>
  CERN IT/PS/PES <it-dep-ps-pes@cern.ch>
-
+ https://github.com/cernops/puppet-voms
 
 
 
