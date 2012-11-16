@@ -1,4 +1,7 @@
-
+#
+# == Class: voms::isntall
+# Install voms-clients package and sets up a few directories.
+# 
 class voms::install {
   package { "voms-clients": 
     ensure  => latest, 

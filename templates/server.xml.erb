@@ -1,0 +1,21 @@
+<Server port="8005" shutdown="SHUTDOWN">
+  <Service name="Catalina">
+
+    <Connector port="8443" maxThreads="150" minSpareThreads="25" 
+               maxSpareThreads="75" enableLookups="false" disableUploadTimeout="true"
+               acceptCount="100" debug="0" scheme="https" secure="true"
+               sSLImplementation="org.glite.security.trustmanager.tomcat.TMSSLImplementation"
+               sslCertFile="/etc/grid-security/tomcat-hostcert.pem"
+               sslKey="/etc/grid-security/tomcat-hostkey.pem"
+               log4jConfFile="/etc/<%= @tomcatservice %>/log4j-trustmanager.properties"
+               clientAuth="true" sslProtocol="TLS"
+               trustStoreDir="/etc/grid-security/certificates"
+               crlUpdateInterval="6h"
+               SSLEnabled="true"/>
+    <Engine name="Catalina" defaultHost="localhost">
+      <Host name="localhost" appBase="webapps" />
+    </Engine>
+  </Service>
+</Server>
+
+
