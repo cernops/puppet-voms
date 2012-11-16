@@ -24,35 +24,35 @@ Create files for the voms-proxy-init and voms-proxy-validate.
 
  The above declaration will create the files:
 
- /etc/vomses/MyVO/voms.cern.ch
+     /etc/vomses/MyVO/voms.cern.ch
  and
- /etc/grid-security/vomsdir/MyVO/voms.cern.ch.lsc
+
+     /etc/grid-security/vomsdir/MyVO/voms.cern.ch.lsc
 
 
  For some VOs, you can probably find a predefined class to enable a
  VO easily which does all the required setup without any 
  additional configuration e.g:
 
-   class{'voms::atlas':}
-   or
-   class{'voms::dteam':}
+     class{'voms::atlas':}
+     class{'voms::dteam':}
 
- Additions of new VOs will be accepted, please submit pull requests
- however zero validation of parameters will be made.
+Additions of new VOs will be accepted, please submit pull requests
+however zero validation of parameters will be made.
 
 ### A VOMS Core Example
 VOMS core is the main voms service and responds to voms-proxy-init requests.
 To configure a VOMS core services for two VOs.
 
-  # Configure defaults.
-  Voms::Core{
-     issuer => 'voms.example.org',
-     sqlpwd => 12345,
-     sqlhost => 'mysql.example.org'
-  }
-  # Configure VOs.
-  voms::core{'special.vo': port => 10000}
-  voms::core{'very.special.vo': port => 10001}
+     # Configure defaults.
+     Voms::Core{
+         issuer => 'voms.example.org',
+         sqlpwd => 12345,
+         sqlhost => 'mysql.example.org'
+     }
+     # Configure VOs.
+     voms::core{'special.vo': port => 10000}
+     voms::core{'very.special.vo': port => 10001}
 
 For full list of available parameters see voms::core definition.
 
@@ -60,23 +60,22 @@ For full list of available parameters see voms::core definition.
 VOMS admin is the tomcat hosted webservice for managing  a Virtual Organisation.
 To configure a few  VOMS admin for a number of VOs.
 
-  # Configure defaults.
-  Voms::Admin{
-     sqlpwd => 12345,
-     sqlhost => 'mysql.example.org'
-  }
-  voms::admin{'special.vo': 
-      port => 10000,
-      mailfrom => 'whoever@example.org'
-
-  }
-  voms::admin{'very.special.vo': 
-      port     => 10001,
-      mailfrom => 'specialman@example.org',
-      config_hash => {'voms.cafiles.period' => 2000,
+     # Configure defaults.
+     Voms::Admin{
+        sqlpwd => 12345,
+        sqlhost => 'mysql.example.org'
+     }
+     voms::admin{'special.vo': 
+        port => 10000,
+        mailfrom => 'whoever@example.org'
+     }
+     voms::admin{'very.special.vo': 
+        port     => 10001,
+        mailfrom => 'specialman@example.org',
+        config_hash => {'voms.cafiles.period' => 2000,
                       'voms.notification.smtp-server' => '127.0.0.1'
                      }
-   }
+     }
 
 For full list of available paramters see voms::admin definition.
 
@@ -98,10 +97,10 @@ names of <voname>_db for each VO the following manifest will install
 and configure mysql with all grant tables suitable for VOMS and VOMS-Admin
 services to connect to.
 
-    class{'mysql::server': }
-    class{'voms::mysql':
-          vo_dbs => ['special.vo_db','very.special.vo_db']
-    }
+     class{'mysql::server': }
+     class{'voms::mysql':
+           vo_dbs => ['special.vo_db','very.special.vo_db']
+     }
   
 This assumes your puppet service is configured to support 
 export resources.
