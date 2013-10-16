@@ -27,8 +27,8 @@ class voms::atlas {
                    },
                    {server => 'vo.racf.bnl.gov',
                     port   => '15003',
-                    dn    => '/DC=org/DC=doegrids/OU=Services/CN=vo.racf.bnl.gov',
-                    ca_dn => '/DC=org/DC=DOEGrids/OU=Certificate Authorities/CN=DOEGrids CA 1'
+                    dn    => '/DC=com/DC=DigiCert-Grid/O=Open Science Grid/OU=Services/CN=vo.racf.bnl.gov',
+                    ca_dn => '/DC=com/DC=DigiCert-Grid/O=DigiCert Grid/CN=DigiCert Grid CA-1',
                    }]
  }
 }
