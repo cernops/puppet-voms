@@ -6,7 +6,8 @@
   "description": "This modules provides classes and definitions required to manage and properly configure a gLite service or client supporting authorization using the gLite Virtual Organization Membership Service (VOMS).",
   "dependencies": [
     {
-      "name": "puppetlabs/stdlib"
+      "name": "puppetlabs/stdlib",
+      "version_requirement": "\u003e\u003d2.2.1"
     }
   ],
   "types": [],
