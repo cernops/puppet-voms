@@ -1,21 +1,14 @@
 class voms::admin::service (
    $tomcatservice = $voms::params::tomcatservice
    ) inherits params {
-   service{'tomcat':
-     name       => "${tomcatservice}",
-     ensure     => true,
-     enable     => true,
-     hasstatus  => true,
-     hasrestart => true,
-   }
 
    service{'voms-admin':
      ensure     => true,
      enable     => true,
      hasstatus  => true,
      hasrestart => false,
-     require    => Service['tomcat']
+     start      => '/sbin/service voms-admin start && /bin/sleep 2m',
+     status     => '/usr/bin/curl --max-time 10  -s http://localhost:8088/status'
    }
-
 
 }

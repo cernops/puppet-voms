@@ -11,8 +11,8 @@ class voms::params {
 
   # Voms Admin Related.
   $adminpkgs        = ['voms-admin-server','voms-admin-client']
-  $emirepo         = "http://emisoft.web.cern.ch/emisoft/dist/EMI/2/sl6/${::architecture}/base/"
-  $emiupdatesrepo  = "http://emisoft.web.cern.ch/emisoft/dist/EMI/2/sl6/${::architecture}/updates/"
+  $emirepo         = "http://emisoft.web.cern.ch/emisoft/dist/EMI/3/sl6/${::architecture}/base/"
+  $emiupdatesrepo  = "http://emisoft.web.cern.ch/emisoft/dist/EMI/3/sl6/${::architecture}/updates/"
   $adminrepowhite   = ['voms-admin-server','voms-admin-client','emi-trustmanager-tomcat','emi-trustmanager']
   $trustmanager_logging   = 'INFO' # should be info.
   $tomcat_filelimit  = '16384'
