@@ -140,10 +140,9 @@ define voms::admin($vo=$name,
 
      $aughash = parseyaml($augyaml)
    
-     create_resources('augeas',$aughash)
-
-
-
+     if $aughash {
+       create_resources('augeas',$aughash)
+     }
 
        @@database_user{"${sqlusername}@${::fqdn}":
           tag           => 'voms_database_users',
