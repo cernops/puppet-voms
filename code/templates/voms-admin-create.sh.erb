@@ -3,10 +3,10 @@
 # This script was created by puppet for creatig schema
 # voms-admin for the VO <%= @vo %>.
 
-/usr/sbin/voms-admin-configure install \
+/usr/sbin/voms-configure install \
       --vo <%= @vo  %> \
       --skip-voms-core \
-      --port <%= @port %> \
+      --core-port <%= @port %> \
       --deploy-database \
       --dbtype  mysql \
       --dbusername  <%= @sqlusername %> \

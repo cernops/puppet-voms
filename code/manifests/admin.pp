@@ -67,12 +67,14 @@ define voms::admin($vo=$name,
                    $mailfrom,
                    $mailsmtp='localhost',
                    $sqlpwd,
+                   $disable_registration,
+                   $disable_notification,
                    $config_hash = {} ) {
 
-       ensure_resource('class','voms::admin::install')
-       ensure_resource('class','voms::admin::config')
-       ensure_resource('class','voms::admin::service')
-       Class[Voms::Admin::Install] -> Class[Voms::Admin::Config] -> Voms::Admin[$vo] -> Class[Voms::Admin::Service]
+       include('voms::admin::install')
+       include('voms::admin::config')
+       include('voms::admin::service')
+       Class[Voms::Admin::Install] -> Class[Voms::Admin::Config] -> Voms::Admin[$name] -> Class[Voms::Admin::Service]
 
 
        file{"/etc/voms-admin-puppet/voms-admin-add-admin-${vo}.sh":
@@ -100,16 +102,19 @@ define voms::admin($vo=$name,
            mode    => "0700",
        }
 
+
        file{"/etc/voms-admin-puppet/voms-admin-install-${vo}.sh":
            ensure => file,
            content => template("voms/voms-admin-install.sh.erb"),
            mode    => "0700",
-           notify  => Exec["/etc/voms-admin-puppet/voms-admin-install-${vo}.sh"]
+           notify  => Exec["/etc/voms-admin-puppet/voms-admin-install-${vo}.sh"],
+           require => Class['fetchcrl']
        }
 
        exec{"/etc/voms-admin-puppet/voms-admin-install-${vo}.sh":
            refreshonly => true,
-           notify      => Service['voms-admin']
+           require     => [File['/etc/grid-security/vomskey.pem'],File['/etc/grid-security/vomscert.pem']],
+           notify      => Service['voms-admin'],
        }
 
        # We need a newer proprties.aug file than SLC5 or 6 provide
@@ -129,17 +134,15 @@ define voms::admin($vo=$name,
    changes: set "<%= k %>" "<%= v %>"
    load_path: <%= @lenspath %>
    require: Exec[/etc/voms-admin-puppet/voms-admin-install-<%= @vo %>.sh]
-   notify: Service[tomcat]
 
 <% end -%>
         ')
 
      $aughash = parseyaml($augyaml)
    
-     create_resources('augeas',$aughash)
-
-
-
+     if $aughash {
+       create_resources('augeas',$aughash)
+     }
 
        @@database_user{"${sqlusername}@${::fqdn}":
           tag           => 'voms_database_users',
