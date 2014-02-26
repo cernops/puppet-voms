@@ -8,7 +8,8 @@ class voms::admin::service (
      hasstatus  => true,
      hasrestart => false,
      start      => '/sbin/service voms-admin start && /bin/sleep 2m',
-     status     => '/usr/bin/curl --max-time 10  -s http://localhost:8088/status'
+     status     => '/usr/bin/curl --max-time 10  -s http://localhost:8088/status',
+     restart    => '/sbin/service voms-admin stop && /bin/sleep 5s && /sbin/service voms-admin start && /bin/sleep 3m',
    }
 
 }
