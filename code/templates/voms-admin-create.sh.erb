@@ -16,8 +16,15 @@
       --dbport      <%= @sqlport %> \
       --mail-from   <%= @mailfrom %> \
       --smtp-host   <%= @mailsmtp %> \
+      --csrf-log-only \
 <% if @read_access_for_authenticated_clients -%>
       --read-access-for-authenticated-clients \
+<% end -%>
+<% if @disable_registration  -%>
+      --disable-registration \
+<% end -%>
+<% if @disable_notification -%>
+      --disable-notification \
 <% end -%>
 <% if @disable_webui_requests  -%>
       --disable-webui-requests @disable_webui_requests \
