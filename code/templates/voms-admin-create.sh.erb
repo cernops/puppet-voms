@@ -16,6 +16,7 @@
       --dbport      <%= @sqlport %> \
       --mail-from   <%= @mailfrom %> \
       --smtp-host   <%= @mailsmtp %> \
+      --max-reqs   <%= @maxreqs %> \
       --csrf-log-only \
 <% if @read_access_for_authenticated_clients -%>
       --read-access-for-authenticated-clients \

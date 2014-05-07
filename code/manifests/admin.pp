@@ -67,6 +67,7 @@ define voms::admin($vo=$name,
                    $mailfrom,
                    $mailsmtp='localhost',
                    $sqlpwd,
+                   $maxreqs='200',
                    $disable_registration,
                    $disable_notification,
                    $config_hash = {} ) {
