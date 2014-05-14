@@ -48,6 +48,7 @@ define voms::core($vo=$name,
                   $sqldbname="${name}_db",
                   $sqlport=3306,
                   $sqlusername="${name}_core",
+                  $maxreqs='200',
                   $sqlpwd) {
 
        include("voms::${name}")
