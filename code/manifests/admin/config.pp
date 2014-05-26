@@ -48,14 +48,6 @@ class voms::admin::config (
      dport  => '8443',
      action => 'accept',
   }
-  # Put the conanical hostname in voms properties file.
-  augeas{'set_canonical_name':
-      context => "/files/etc/voms-admin/voms-admin-server.properties",
-      changes => "set host ${::fqdn}",
-      lens    => "Properties.lns",
-      incl    => '/etc/voms-admin/voms-admin-server.properties',
-      notify  => Service['voms-admin']
-  }
 
 
 }

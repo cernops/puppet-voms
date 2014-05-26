@@ -4,6 +4,9 @@
 # 
 # === Parameters
 # 
+# [*hostname*]
+#  The hostname of the voms-admin instance. By default it is the $::fqdn.
+#
 # [*vo*]
 #  The name of virtual orgnisation. If not defined the namevar of the voms::admin intance will be used.
 # 
@@ -58,7 +61,8 @@
 # === License
 #  Apache II
 # 
-define voms::admin($vo=$name,
+define voms::admin($hostname=$::fqdn,
+                   $vo=$name,
                    $sqlhost='localhost',
                    $sqldbname="${name}_db",
                    $sqlusername="${name}_admin",
@@ -116,6 +120,15 @@ define voms::admin($vo=$name,
            require     => [File['/etc/grid-security/vomskey.pem'],File['/etc/grid-security/vomscert.pem']],
            notify      => Service['voms-admin'],
        }
+
+       # Put the conanical hostname in voms properties file.
+      augeas{'set_canonical_name':
+        context => "/files/etc/voms-admin/voms-admin-server.properties",
+        changes => "set host ${hostname}",
+        lens    => "Properties.lns",
+        incl    => '/etc/voms-admin/voms-admin-server.properties',
+        notify  => Service['voms-admin']
+  }
 
        # We need a newer proprties.aug file than SLC5 or 6 provide
        # Can be dropped hopefully at a later date providing
