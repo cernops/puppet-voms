@@ -121,14 +121,6 @@ define voms::admin($hostname=$::fqdn,
            notify      => Service['voms-admin'],
        }
 
-      # Put the hostname in voms properties file.
-      ensure_resource('augeas', 'set hostname',{
-          'context' => "/files/etc/voms-admin/voms-admin-server.properties",
-          'changes' => "set host ${hostname}",
-          'lens'    => "Properties.lns",
-          'incl'    => '/etc/voms-admin/voms-admin-server.properties',
-          'notify'  => "Service['voms-admin']",
-        })
 
        # We need a newer proprties.aug file than SLC5 or 6 provide
        # Can be dropped hopefully at a later date providing
