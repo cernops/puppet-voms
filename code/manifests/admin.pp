@@ -61,8 +61,7 @@
 # === License
 #  Apache II
 # 
-define voms::admin($hostname=$::fqdn,
-                   $vo=$name,
+define voms::admin($vo=$name,
                    $sqlhost='localhost',
                    $sqldbname="${name}_db",
                    $sqlusername="${name}_admin",
