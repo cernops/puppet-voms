@@ -8,6 +8,7 @@ class voms::params {
   # Voms Core Related.
   $clientpkgs = hiera('voms_clientpkgs',['voms-clients'])
   $corepkgs  = ['voms-server','voms-mysql-plugin']
+  $host = hiera('lcgvoms_voms_issuer', $::fqdn)
 
   # Voms Admin Related.
   $adminpkgs        = ['voms-admin-server','voms-admin-client']

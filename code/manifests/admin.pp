@@ -4,6 +4,9 @@
 # 
 # === Parameters
 # 
+# [*hostname*]
+#  The hostname of the voms-admin instance. By default it is the $::fqdn.
+#
 # [*vo*]
 #  The name of virtual orgnisation. If not defined the namevar of the voms::admin intance will be used.
 # 
@@ -116,6 +119,7 @@ define voms::admin($vo=$name,
            require     => [File['/etc/grid-security/vomskey.pem'],File['/etc/grid-security/vomscert.pem']],
            notify      => Service['voms-admin'],
        }
+
 
        # We need a newer proprties.aug file than SLC5 or 6 provide
        # Can be dropped hopefully at a later date providing
