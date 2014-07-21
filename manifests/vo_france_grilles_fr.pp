@@ -1,5 +1,5 @@
 class voms::vo_france_grilles_fr {
-  voms::client{'vo.france_grilles.fr':
+  voms::client{'vo.france-grilles.fr':
     servers => [
       {
         server => 'cclcgvomsli01.in2p3.fr',
