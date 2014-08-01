@@ -19,11 +19,6 @@ class voms::ilc {
                     port   => '15110',
                     dn    => '/C=DE/O=GermanGrid/OU=DESY/CN=host/grid-voms.desy.de',
                     ca_dn => '/C=DE/O=GermanGrid/CN=GridKa-CA'
-                   },
-                   {server => 'voms.fnal.gov',
-                    port   => '15023',
-                    dn    => '/DC=org/DC=doegrids/OU=Services/CN=http/voms.fnal.gov',
-                    ca_dn => '/DC=org/DC=DOEGrids/OU=Certificate Authorities/CN=DOEGrids CA 1'
                    }]
  }
 }
