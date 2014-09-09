@@ -49,6 +49,10 @@ define voms::core($vo=$name,
                   $sqlport=3306,
                   $sqlusername="${name}_core",
                   $maxreqs='200',
+                  $passfile=$vo ? {
+                    ''      => "/etc/voms/${name}/voms.pass",
+                    default => "/etc/voms/${vo}/voms.pass"
+                  },
                   $sqlpwd) {
 
        include("voms::${name}")

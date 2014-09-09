@@ -10,7 +10,7 @@
       --deploy-database \
       --dbtype  mysql \
       --dbusername  <%= @sqlusername %> \
-      --dbpassword  <%= @sqlpwd %> \
+      --dbpassword  `cat <%= @passfile  %>` \
       --dbname      <%= @sqldbname %> \
       --dbhost      <%= @sqlhost %> \
       --dbport      <%= @sqlport %> \
