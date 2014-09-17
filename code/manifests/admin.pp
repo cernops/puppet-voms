@@ -70,6 +70,10 @@ define voms::admin($vo=$name,
                    $mailfrom,
                    $mailsmtp='localhost',
                    $sqlpwd,
+                   $passfile=$vo ? {
+                    ''      => "/etc/voms/${name}/voms.pass",
+                    default => "/etc/voms/${vo}/voms.pass"
+                   },
                    $disable_registration,
                    $disable_notification,
                    $config_hash = {} ) {
