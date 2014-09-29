@@ -1,5 +1,5 @@
 class voms::vo_hess_experiment_eu {
-  voms::client{'vo.hess-experiment.eu':
+  voms::client{'vo.hess_experiment.eu':
     servers => [
       {
         server => 'grid12.lal.in2p3.fr',
