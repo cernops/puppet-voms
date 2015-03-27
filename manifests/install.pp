@@ -6,9 +6,9 @@ class voms::install (
   $clientpkgs = $voms::params::clientpkgs
 ) inherits voms::params {
 
-  package { $clientpkgs:
-    ensure  => present, 
-  }
+  #package { $clientpkgs:
+  #  ensure  => present, 
+  #}
 
   file{'/etc/grid-security/vomsdir':
               ensure  => directory,
