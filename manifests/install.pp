@@ -2,8 +2,11 @@
 # == Class: voms::isntall
 # Install voms-clients package and sets up a few directories.
 # 
-class voms::install {
-  package { "voms-clients": 
+class voms::install (
+  $vomsclients = ["voms-clients"]
+)
+{
+  package { $voms-clients: 
     ensure  => latest, 
     require => Package["lcg-CA"],
   }
