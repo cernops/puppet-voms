@@ -1,3 +1,4 @@
+2015-03-30  Andrea Manzi  <andrea.manzi@cern.ch>
+    * Removing voms-clients installation ( not needed for DPM)
 2011-04-01  Ricardo Rocha  <ricardo.rocha@cern.ch>
-
     * First Release
