@@ -1,0 +1,25 @@
+# File installed with puppet
+
+# the default logger level is set to INFO
+# possible values are: DEBUG, INFO, WARN, ERROR and FATAL
+# (DEBUG shows the maximum information, FATAL least)
+log4j.logger.org.glite.security=<%= @trustmanager_logging %>, fileout
+
+log4j.appender.fileout=org.apache.log4j.RollingFileAppender
+
+# the OUTPUT FILE for the logging messages
+log4j.appender.fileout.File=${catalina.base}/logs/trustmanager.log
+
+
+# define max file size for the debug file
+log4j.appender.fileout.MaxFileSize=2000KB
+
+# Keep one backup file
+log4j.appender.fileout.MaxBackupIndex=10
+
+log4j.appender.fileout.layout=org.apache.log4j.PatternLayout
+
+# define the pattern of the messages
+
+# use the closest format derived to the logging groups recommendation
+log4j.appender.fileout.layout.ConversionPattern=tomcat [%t]: %d{yyyy-MM-dd'T'HH:mm:ss.SSSZZZZ} %-5p %c{2} %x - %m%n

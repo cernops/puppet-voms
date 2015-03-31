@@ -1,0 +1,21 @@
+--vo=<%= @vo %>
+--port=<%= @port %>
+--code=<%= @port %>
+--uri=<%= @issuer %>:<%= @port %>
+--skipcacheck
+--loglevel=4
+--logtype=7
+--timeout=<%= @vomstimeout %>
+--logmax=500000000
+--logfile=/var/log/voms/<%= @vo %>.log
+--passfile=<%= @passfile %>
+<% if @architecture == "x86_64" -%>
+--sqlloc=/usr/lib64/voms/libvomsmysql.so
+<% else -%>
+--sqlloc=/usr/lib/voms/libvomsmysql.so
+<% end -%>
+--dbname=<%= @sqldbname %>
+--mysql-port=<%= @sqlport %>
+--username=<%= @sqlusername %>
+--contactstring=<%= @sqlhost %>
+--max-reqs=<%= @maxreqs %>
