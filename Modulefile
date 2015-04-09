@@ -1,6 +1,6 @@
 name    'lcgdm-voms'
-version '0.2.1'
-source 'UNKNOWN'
+version '0.2.2'
+source 'https://github.com/cern-it-sdc-id/puppet-voms'
 author 'lcgdm'
 license 'Apache License, Version 2.0'
 summary 'Resources for managing a gLite Virtual Organization Membership Service (VOMS) client and server installation'
