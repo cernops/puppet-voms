@@ -6,7 +6,6 @@ env:
     - PUPPET_VERSION=2.6.18 PUPPETCOMMAND=" --parseonly --ignoreimport"
     - PUPPET_VERSION=2.7.26 PUPPETCOMMAND="parser validate"
 script:
-    - puppet-lint --no-80chars-check --no-autoloader_layout-check .
     - find . -name *.pp | xargs puppet $PUPPETCOMMAND
 matrix:
     include:
