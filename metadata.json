@@ -7,7 +7,7 @@
     }
   ],
   "description": "This modules provides classes and definitions required to manage and properly configure a gLite service or client supporting authorization using the gLite Virtual Organization Membership Service (VOMS).",
-  "license": "Apache License, Version 2.0",
+  "license": "Apache-2.0",
   "name": "lcgdm-voms",
   "operatingsystem_support": [],
   "project_page": "http://glite.org",
