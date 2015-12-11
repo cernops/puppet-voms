@@ -1,5 +1,8 @@
 ## cernops-voms puppet module
 
+[![Puppet Forge](http://img.shields.io/puppetforge/v/lcgdm/voms.svg)](https://forge.puppetlabs.com/lcgdm/voms)
+[![Build Status](https://travis-ci.org/cern-it-sdc-id/puppet-voms.svg?branch=master)](https://travis-ci.org/cern-it-sdc-id/puppet-voms)
+
 This module manages VOMS resources for VOMS clients
 
 VOMS is the Virtual Organization Membership Service, in use by gLite, EMI, and
