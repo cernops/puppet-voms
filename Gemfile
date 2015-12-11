@@ -1,25 +1,25 @@
-source ENV['GEM_SOURCE'] || "https://rubygems.org"
+source "https://rubygems.org"
 
-# https://github.com/rspec/rspec-core/issues/1864
-gem 'rspec', '~> 3.1.0'
-gem 'puppetlabs_spec_helper', '>= 0.1.0'
-gem 'puppet-lint', '>= 0.3.2'
-
-if RUBY_VERSION != '1.8.7'
-  gem 'beaker-rspec',  :require => false
-  gem 'pry', :require => false
+group :test do
+  gem "rake"
+  gem "puppet", ENV['PUPPET_GEM_VERSION'] || '~> 3.8.0'
+  gem "puppet-lint"
+  gem "puppet-lint-unquoted_string-check"
+  gem "rspec-puppet", :git => 'https://github.com/rodjek/rspec-puppet.git'
+  gem "puppet-syntax"
+  gem "puppetlabs_spec_helper"
+  gem "metadata-json-lint"
+  gem "rspec", '< 3.2.0'
 end
 
-if facterversion = ENV['FACTER_GEM_VERSION']
-  gem 'facter', facterversion, :require => false
-else
-  gem 'facter', :require => false
+group :development do
+  gem "travis"
+  gem "travis-lint"
+  gem "beaker", "~> 2.0"
+  gem "beaker-puppet_install_helper", :require => false
+  gem "beaker-rspec"
+  gem "puppet-blacksmith"
+  gem "guard-rake"
+  gem "pry"
+  gem "yard"
 end
-
-if puppetversion = ENV['PUPPET_GEM_VERSION']
-  gem 'puppet', puppetversion, :require => false
-else
-  gem 'puppet', :require => false
-end
-
-# vim:ft=ruby
