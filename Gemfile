@@ -3,8 +3,8 @@ source "https://rubygems.org"
 group :test do
   gem "rake"
   gem "puppet", ENV['PUPPET_GEM_VERSION'] || '~> 3.8.0'
-  gem "puppet-lint"
-  gem "puppet-lint-unquoted_string-check"
+  #gem "puppet-lint"
+  #gem "puppet-lint-unquoted_string-check"
   gem "rspec-puppet", :git => 'https://github.com/rodjek/rspec-puppet.git'
   gem "puppet-syntax"
   gem "puppetlabs_spec_helper"
