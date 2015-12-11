@@ -14,7 +14,7 @@ class voms::install (
               ensure  => directory,
               owner   => root,
               group   => root,
-              mode    => 0755,
+              mode    => '0755',
               purge   => true,
               recurse => true,
               force   => true, #because voms::client creates subdirectories, we need force=true to remove them when purging
@@ -23,7 +23,7 @@ class voms::install (
              ensure  => directory,
              owner   => root,
              group   => root,
-             mode    => 0755,
+             mode    => '0755',
              purge   => true,
              recurse => true,
   }                   
