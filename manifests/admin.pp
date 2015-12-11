@@ -85,35 +85,35 @@ define voms::admin($vo=$name,
 
 
        file{"/etc/voms-admin-puppet/voms-admin-add-admin-${vo}.sh":
-           ensure => file,
-           content => template("voms/voms-admin-add-admin.sh.erb"),
-           mode    => "0700",
+           ensure  => file,
+           content => template('voms/voms-admin-add-admin.sh.erb'),
+           mode    => '0700',
        }
 
 
        file{"/etc/voms-admin-puppet/voms-admin-remove-${vo}.sh":
-           ensure => file,
-           content => template("voms/voms-admin-remove.sh.erb"),
-           mode    => "0700",
+           ensure  => file,
+           content => template('voms/voms-admin-remove.sh.erb'),
+           mode    => '0700',
        }
 
        file{"/etc/voms-admin-puppet/voms-admin-create-${vo}.sh":
-           ensure => file,
-           content => template("voms/voms-admin-create.sh.erb"),
-           mode    => "0700",
+           ensure  => file,
+           content => template('voms/voms-admin-create.sh.erb'),
+           mode    => '0700',
        }
 
        file{"/etc/voms-admin-puppet/voms-admin-upgrade-${vo}.sh":
-           ensure => file,
-           content => template("voms/voms-admin-upgrade.sh.erb"),
-           mode    => "0700",
+           ensure  => file,
+           content => template('voms/voms-admin-upgrade.sh.erb'),
+           mode    => '0700',
        }
 
 
        file{"/etc/voms-admin-puppet/voms-admin-install-${vo}.sh":
-           ensure => file,
-           content => template("voms/voms-admin-install.sh.erb"),
-           mode    => "0700",
+           ensure  => file,
+           content => template('voms/voms-admin-install.sh.erb'),
+           mode    => '0700',
            notify  => Exec["/etc/voms-admin-puppet/voms-admin-install-${vo}.sh"],
            require => Class['fetchcrl']
        }
@@ -158,8 +158,8 @@ define voms::admin($vo=$name,
           require       => Class['mysql::server']
        }
        @@database_grant{"${sqlusername}@${::fqdn}/${sqldbname}":
-          tag           => 'voms_database_grant',
-          privileges    => ['Select_priv','Insert_priv','Update_priv','Alter_Priv','Create_Priv']
+          tag        => 'voms_database_grant',
+          privileges => ['Select_priv','Insert_priv','Update_priv','Alter_Priv','Create_Priv']
        }
 }
 
