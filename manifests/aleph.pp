@@ -15,16 +15,7 @@
 
 class voms::aleph {
   voms::client{'vo.aleph.cern.ch':
-      servers  => [{server => 'voms.cern.ch',
-                    port   => '15002',
-                    dn    => '/DC=ch/DC=cern/OU=computers/CN=voms.cern.ch',
-                    ca_dn => '/DC=ch/DC=cern/CN=CERN Trusted Certification Authority'
-                   },
-                   {server => 'lcg-voms.cern.ch',
-                    port   => '15002',
-                    dn    => '/DC=ch/DC=cern/OU=computers/CN=lcg-voms.cern.ch',
-                    ca_dn => '/DC=ch/DC=cern/CN=CERN Trusted Certification Authority'
-                   },
+      servers  => [
 		   {server => 'voms2.cern.ch',
 		    port   => '15002',
 		    dn    => '/DC=ch/DC=cern/OU=computers/CN=voms2.cern.ch',
