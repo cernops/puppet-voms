@@ -59,7 +59,7 @@ define voms::core($vo=$name,
        include('voms::core::install')
        include('voms::core::config')
        include('voms::core::service')
-       Class[Voms::Core::Install] -> Voms::Core[$name] -> Class[Voms::Core::Service]
+       Class[voms::core::install] -> Voms::Core[$name] -> Class[voms::core::service]
 
       
        firewall {"100 allow ${name} access from the universe.":
