@@ -10,17 +10,17 @@ class voms::core::config {
  }
 
  file{'/etc/voms/.globus':
-     ensure => directory,
+     ensure  => directory,
      require => File['/etc/voms']
  }
  # The host key must be owned by the voms user.
  file{'/etc/grid-security/hostkey.pem':
-     ensure => file,
-     mode   => '0600',
-     owner  => voms,
-     group  => root,
-     content => "Should be a hostkey, will not be overwritten by puppet if this file exists\n",
-     replace => false,
+     ensure    => file,
+     mode      => '0600',
+     owner     => voms,
+     group     => root,
+     content   => "Should be a hostkey, will not be overwritten by puppet if this file exists\n",
+     replace   => false,
      show_diff => false
  }
 
@@ -28,19 +28,19 @@ class voms::core::config {
  file{'/etc/voms/.globus/usercert.pem':
      ensure  => file,
      source  => 'file:///etc/grid-security/hostcert.pem',
-      owner   => voms,
-      group   => voms,
-      mode    => '0644',
-      notify  => Service['voms'], 
+      owner  => voms,
+      group  => voms,
+      mode   => '0644',
+      notify => Service['voms'],
   }
   file{'/etc/voms/.globus/userkey.pem':
-      ensure  => file,
-      source  => 'file:///etc/grid-security/hostkey.pem',
-      owner   => voms,
-      group   => voms,
-      mode    => '0600',
+      ensure    => file,
+      source    => 'file:///etc/grid-security/hostkey.pem',
+      owner     => voms,
+      group     => voms,
+      mode      => '0600',
       show_diff => false,
-      notify  => Service['voms'], 
+      notify    => Service['voms'],
   }
         
   file {'/usr/lib64/voms':

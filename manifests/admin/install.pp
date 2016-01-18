@@ -7,7 +7,7 @@ class voms::admin::install (
 ) inherits voms::params {
 
   package{$adminpkgs:
-    ensure => present,
+    ensure  => present,
     require => Yumrepo['EMI-3-base']
   }
 

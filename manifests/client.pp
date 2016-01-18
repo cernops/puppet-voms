@@ -36,7 +36,7 @@
 #
 define voms::client ($vo = $name, $servers = []  ) {
    ensure_resource('class','voms::install')
-   Class[Voms::Install] -> Voms::Client[$vo]
+   Class[voms::install] -> Voms::Client[$vo]
 
    file {"/etc/grid-security/vomsdir/${vo}":
                    ensure  => directory,

@@ -11,9 +11,9 @@ class voms::admin::config (
     recurse => true
   }
   file{"/etc/voms-admin-puppet/README":
-    ensure   => file,
-    content  => template('voms/README.erb'),
-    require  => File["/etc/voms-admin-puppet"]
+    ensure  => file,
+    content => template('voms/README.erb'),
+    require => File["/etc/voms-admin-puppet"]
   }
   file{"/usr/share/voms-admin":
     ensure  => directory,
@@ -22,26 +22,26 @@ class voms::admin::config (
   $memsize = to_bytes($::memorytotal) / ( 2 * 1000000 )
 
   if $::virtualorgs  {
-    $permsize = 64 + ( 25 * size(split($::virtualorgs,' '))) 
+    $permsize = 64 + ( 25 * size(split($::virtualorgs,' ')))
   } else  {
-    $permsize = 64 + 25 
+    $permsize = 64 + 25
   }
 
   file{'/etc/grid-security/vomscert.pem':
-    ensure  => file,
-    source  => 'file:///etc/grid-security/hostcert.pem',
-    owner   => voms,
-    group   => voms,
-    mode    => '0644',
-    notify  => Service['voms-admin'], 
+    ensure => file,
+    source => 'file:///etc/grid-security/hostcert.pem',
+    owner  => voms,
+    group  => voms,
+    mode   => '0644',
+    notify => Service['voms-admin'],
   }
   file{'/etc/grid-security/vomskey.pem':
-    ensure  => file,
-    source  => 'file:///etc/grid-security/hostkey.pem',
-    owner   => voms,
-    group   => voms,
-    mode    => '0600',
-    notify  => Service['voms-admin'], 
+    ensure => file,
+    source => 'file:///etc/grid-security/hostkey.pem',
+    owner  => voms,
+    group  => voms,
+    mode   => '0600',
+    notify => Service['voms-admin'],
   }
   firewall{'100 allow https to VOMS-admin UI':
     proto  => 'tcp',

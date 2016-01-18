@@ -59,13 +59,13 @@ define voms::core($vo=$name,
        include('voms::core::install')
        include('voms::core::config')
        include('voms::core::service')
-       Class[Voms::Core::Install] -> Voms::Core[$name] -> Class[Voms::Core::Service]
+       Class[voms::core::install] -> Voms::Core[$name] -> Class[voms::core::service]
 
       
        firewall {"100 allow ${name} access from the universe.":
-           proto   => 'tcp',
-           dport   => $port,
-           action  => 'accept'
+           proto  => 'tcp',
+           dport  => $port,
+           action => 'accept'
        }
 
        file{"/etc/voms/${vo}":
@@ -74,7 +74,7 @@ define voms::core($vo=$name,
            owner   => "root",
            group   => "root",
            purge   => true,
-           recurse  => true,
+           recurse => true,
            require => File['/etc/voms']
        }
 
@@ -103,7 +103,7 @@ define voms::core($vo=$name,
           require       => Class['mysql::server']
        }
        @@database_grant{"${sqlusername}@${::fqdn}/${sqldbname}":
-          tag           => 'voms_database_grant',
-          privileges    => ['Select_priv']
+          tag        => 'voms_database_grant',
+          privileges => ['Select_priv']
        }
 }

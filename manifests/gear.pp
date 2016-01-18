@@ -16,23 +16,13 @@
 #unfortunately the full VO name vo.gear.cern.ch is not a valid class name...
 class voms::gear {
   voms::client{'vo.gear.cern.ch':
-      servers  => [{server => 'voms.cern.ch',
-                    port   => '15008',
-                    dn    => '/DC=ch/DC=cern/OU=computers/CN=voms.cern.ch',
-                    ca_dn => '/DC=ch/DC=cern/CN=CERN Trusted Certification Authority'
-                   },
-                   {server => 'lcg-voms.cern.ch',
-                    port   => '15008',
-                    dn    => '/DC=ch/DC=cern/OU=computers/CN=lcg-voms.cern.ch',
-                    ca_dn => '/DC=ch/DC=cern/CN=CERN Trusted Certification Authority'
-                   },
-                   {server => 'voms2.cern.ch',
-                    port   => '15008',
+      servers => [{server                   => 'voms2.cern.ch',
+                    port  => '15008',
                     dn    => '/DC=ch/DC=cern/OU=computers/CN=voms2.cern.ch',
                     ca_dn => '/DC=ch/DC=cern/CN=CERN Grid Certification Authority',
                    },
-                   {server => 'lcg-voms2.cern.ch',
-                    port   => '15008',
+                   {server                   => 'lcg-voms2.cern.ch',
+                    port  => '15008',
                     dn    => '/DC=ch/DC=cern/OU=computers/CN=lcg-voms2.cern.ch',
                     ca_dn => '/DC=ch/DC=cern/CN=CERN Grid Certification Authority',
                    }]
