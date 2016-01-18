@@ -18,7 +18,7 @@ class voms::mice {
           port => '15001',
             dn => '/C=UK/O=eScience/OU=Imperial/L=Physics/CN=voms03.gridpp.ac.uk ',
          ca_dn => '/C=UK/O=eScienceCA/OU=Authority/CN=UK e-Science CA 2B',
-      },         
+      },
     ]
   }
 }

@@ -47,14 +47,14 @@ define voms::server($vo, $server, $port, $dn, $ca_dn) {
                        mode   => 0644,
                        purge  => true
                      }
-                 )              
+                 )
 
 
   ensure_resource('file',"/etc/grid-security/vomsdir/${vo}",
                      { ensure => directory,
                        owner  => root,
                        group  => root,
-                       mode   => 0644, 
+                       mode   => 0644,
                        purge  => true,
                        require => File['/etc/grid-security/vomsdir']
                      }
@@ -63,13 +63,13 @@ define voms::server($vo, $server, $port, $dn, $ca_dn) {
                      { ensure => directory,
                        owner  => root,
                        group  => root,
-                       mode   => 0644, 
+                       mode   => 0644,
                        purge  => true,
                      }
                  )
                                    
 
-  file { 
+  file {
     "voms_lsc_$vo-$server":
       path    => "/etc/grid-security/vomsdir/$vo/$server.lsc",
       owner   => root,

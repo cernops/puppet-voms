@@ -18,7 +18,7 @@ class voms::t2k_org {
           port => '15003',
             dn => '/C=UK/O=eScience/OU=Imperial/L=Physics/CN=voms03.gridpp.ac.uk',
          ca_dn => '/C=UK/O=eScienceCA/OU=Authority/CN=UK e-Science CA 2B',
-      },         
+      },
     ]
   }
 }

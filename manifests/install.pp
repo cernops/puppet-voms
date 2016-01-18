@@ -7,7 +7,7 @@ class voms::install (
 ) inherits voms::params {
 
   package { $clientpkgs:
-    ensure  => present, 
+    ensure  => present,
   }
 
   file{'/etc/grid-security/vomsdir':
@@ -18,7 +18,7 @@ class voms::install (
               purge   => true,
               recurse => true,
               force   => true, #because voms::client creates subdirectories, we need force=true to remove them when purging
-  }                   
+  }
   file{'/etc/vomses':
              ensure  => directory,
              owner   => root,
@@ -26,6 +26,6 @@ class voms::install (
              mode    => '0755',
              purge   => true,
              recurse => true,
-  }                   
+  }
 
 }
