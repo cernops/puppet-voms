@@ -11,23 +11,23 @@ Create files for the voms-proxy-init and voms-proxy-validate.
 
      voms::client{'MyVO':
         vo       => 'MyVO',
-        servers  => [{server => 'voms.cern.ch',
+        servers  => [{server => 'voms2.cern.ch',
                       port   => '15009',
-                      dn     => '/DC=ch/DC=cern/OU=computers/CN=voms.cern.ch',
-                      ca_dn  => '/DC=ch/DC=cern/CN=CERN Trusted Certification Authority'
+                      dn     => '/DC=ch/DC=cern/OU=computers/CN=voms2.cern.ch',
+                      ca_dn  => '/DC=ch/DC=cern/CN=CERN Grid Certification Authority'
                      },
-                     {server => 'lcg-voms.cern.ch',
+                     {server => 'lcg-voms2.cern.ch',
                       port   => '15009',
-                       dn    => '/DC=ch/DC=cern/OU=computers/CN=lcg-voms.cern.ch',
-                       ca_dn => '/DC=ch/DC=cern/CN=CERN Trusted Certification Authority'
+                       dn    => '/DC=ch/DC=cern/OU=computers/CN=lcg-voms2.cern.ch',
+                       ca_dn => '/DC=ch/DC=cern/CN=CERN Grid Certification Authority'
                      }]
 
  The above declaration will create the files:
 
-     /etc/vomses/MyVO/voms.cern.ch
+     /etc/vomses/MyVO/voms2.cern.ch
  and
 
-     /etc/grid-security/vomsdir/MyVO/voms.cern.ch.lsc
+     /etc/grid-security/vomsdir/MyVO/voms2.cern.ch.lsc
 
 
  For some VOs, you can probably find a predefined class to enable a

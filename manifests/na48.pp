@@ -15,15 +15,15 @@
 
 class voms::na48 {
   voms::client{'na48':
-      servers  => [{server => 'voms.cern.ch',
+      servers  => [{server => 'voms2.cern.ch',
                     port   => '15009',
-                    dn    => '/DC=ch/DC=cern/OU=computers/CN=voms.cern.ch',
-                    ca_dn => '/DC=ch/DC=cern/CN=CERN Trusted Certification Authority'
+                    dn    => '/DC=ch/DC=cern/OU=computers/CN=voms2.cern.ch',
+                    ca_dn => '/DC=ch/DC=cern/CN=CERN Grid Certification Authority'
                    },
-                   {server => 'lcg-voms.cern.ch',
+                   {server => 'lcg-voms2.cern.ch',
                     port   => '15009',
-                    dn    => '/DC=ch/DC=cern/OU=computers/CN=lcg-voms.cern.ch',
-                    ca_dn => '/DC=ch/DC=cern/CN=CERN Trusted Certification Authority'
+                    dn    => '/DC=ch/DC=cern/OU=computers/CN=lcg-voms2.cern.ch',
+                    ca_dn => '/DC=ch/DC=cern/CN=CERN Grid Certification Authority'
                    }]
  }
 }
