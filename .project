@@ -3,6 +3,8 @@
 	<name>puppet-voms</name>
 	<comment></comment>
 	<projects>
+		<project>external-mysql</project>
+		<project>external-stdlib</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
