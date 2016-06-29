@@ -10,7 +10,7 @@
   "license": "Apache-2.0",
   "name": "lcgdm-voms",
   "operatingsystem_support": [],
-  "project_page": "http://glite.org",
+  "project_page": "https://github.com/cern-it-sdc-id/puppet-voms",
   "requirements": [],
   "source": "https://github.com/cern-it-sdc-id/puppet-voms",
   "summary": "Resources for managing a gLite Virtual Organization Membership Service (VOMS) client and server installation'",
