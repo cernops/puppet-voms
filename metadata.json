@@ -15,5 +15,5 @@
   "source": "https://github.com/cern-it-sdc-id/puppet-voms",
   "summary": "Resources for managing a gLite Virtual Organization Membership Service (VOMS) client and server installation'",
   "tags": [],
-  "version": "0.3.1"
+  "version": "0.3.2"
 }
