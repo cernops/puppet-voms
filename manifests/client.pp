@@ -42,7 +42,7 @@ define voms::client ($vo = $name, $servers = []  ) {
                    ensure  => directory,
                    owner   => root,
                    group   => root,
-                   mode    => 0755, 
+                   mode    => "0755", 
                    recurse => true,
                    purge   => true,
                    require => File['/etc/grid-security/vomsdir']
@@ -52,7 +52,7 @@ define voms::client ($vo = $name, $servers = []  ) {
   File{
      owner => root,
      group => root,
-     mode  => 0644
+     mode  => "0644"
   }
   
 
