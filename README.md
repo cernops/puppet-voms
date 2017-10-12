@@ -26,7 +26,7 @@ other grid computing projects.
 
  The above declaration will create the files:
 
-     /etc/vomses/MyVO/voms.cern.ch
+     /etc/vomses/MyVO-voms.cern.ch
  and
 
      /etc/grid-security/vomsdir/MyVO/voms.cern.ch.lsc
