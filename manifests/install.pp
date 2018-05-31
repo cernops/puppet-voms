@@ -5,7 +5,7 @@
 class voms::install {
   package { "voms-clients": 
     ensure  => latest, 
-    require => Package["lcg-CA"],
+    require => Package["ca-policy-egi-core"],
   }
 
   file{'/etc/grid-security/vomsdir':
@@ -15,7 +15,7 @@ class voms::install {
               mode    => "0755",
               purge   => true,
               recurse => true,
-              require => Package["lcg-CA"],
+              require => Package["ca-policy-egi-core"],
   }                   
   file{'/etc/vomses':
              ensure  => directory,
@@ -24,7 +24,7 @@ class voms::install {
              mode    => "0755",
              purge   => true,
              recurse => true,
-             require => Package["lcg-CA"],
+             require => Package["ca-policy-egi-core"],
   }                   
 
 }
