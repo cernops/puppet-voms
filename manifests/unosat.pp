@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Class defining the unosat VO, as seen by the VOMS service.
 #
 # Takes care of all the required setup to enable access to the unosat VO
