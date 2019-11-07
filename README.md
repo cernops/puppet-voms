@@ -1,7 +1,7 @@
 ## cernops-voms puppet module
 
 [![Puppet Forge](http://img.shields.io/puppetforge/v/lcgdm/voms.svg)](https://forge.puppetlabs.com/lcgdm/voms)
-[![Build Status](https://travis-ci.org/cern-it-sdc-id/puppet-voms.svg?branch=master)](https://travis-ci.org/cern-it-sdc-id/puppet-voms)
+[![Build Status](https://travis-ci.org/hep-puppet/puppet-voms.svg?branch=master)](https://travis-ci.org/hep-puppet/puppet-voms)
 
 This module manages VOMS resources for VOMS clients
 
@@ -41,11 +41,4 @@ other grid computing projects.
 
 Additions of new VOs will be accepted, please submit pull requests
 however zero validation of parameters will be made.
-
-## Authors
- CERN IT/GT/DMS <it-dep-gt-dms@cern.ch>, Ricardo Rocha
- CERN IT/PS/PES <it-dep-ps-pes@cern.ch>, Steve Traylen
- Bugs, Comments, Pull requests - https://github.com/cernops/puppet-voms
-
-
 
