@@ -3,13 +3,13 @@
 # This script was created by puppet for removing
 # voms-admin for the VO <%= @vo %>.
 
-/usr/sbin/voms-admin-configure remove \
+/usr/sbin/voms-configure remove \
       --vo <%= @vo  %> \
       --skip-voms-core \
-      --port <%= @port %> \
+      --core-port <%= @port %> \
       --dbtype  mysql \
       --dbusername  <%= @sqlusername %> \
-      --dbpassword  <%= @sqlpwd %> \
+      --dbpassword  `cat <%= @passfile  %>` \
       --dbname      <%= @sqldbname %> \
       --dbhost      <%= @sqlhost %> \
       --dbport      <%= @sqlport %> \

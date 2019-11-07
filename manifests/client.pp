@@ -36,13 +36,13 @@
 #
 define voms::client ($vo = $name, $servers = []  ) {
    ensure_resource('class','voms::install')
-   Class[Voms::Install] -> Voms::Client[$vo]
+   Class[voms::install] -> Voms::Client[$vo]
 
    file {"/etc/grid-security/vomsdir/${vo}":
                    ensure  => directory,
                    owner   => root,
                    group   => root,
-                   mode    => "0755", 
+                   mode    => '0755',
                    recurse => true,
                    purge   => true,
                    require => File['/etc/grid-security/vomsdir']
@@ -52,7 +52,7 @@ define voms::client ($vo = $name, $servers = []  ) {
   File{
      owner => root,
      group => root,
-     mode  => "0644"
+     mode  => '0644',
   }
   
 
@@ -73,6 +73,5 @@ define voms::client ($vo = $name, $servers = []  ) {
 
    $filedata = parseyaml($yaml)
    create_resources('file',$filedata)
-
 
 }

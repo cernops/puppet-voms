@@ -48,21 +48,34 @@ define voms::core($vo=$name,
                   $sqldbname="${name}_db",
                   $sqlport=3306,
                   $sqlusername="${name}_core",
+                  $maxreqs='200',
+                  $passfile=$vo ? {
+                    ''      => "/etc/voms/${name}/voms.pass",
+                    default => "/etc/voms/${vo}/voms.pass"
+                  },
                   $sqlpwd) {
 
-       ensure_resource('class',"voms::${vo}")
-       ensure_resource('class','voms::core::install')
-       ensure_resource('class','voms::core::service')
-       Class[Voms::Core::Install] -> Voms::Core[$vo] -> Class[Voms::Core::Service]
+       include("voms::${name}")
+       include('voms::core::install')
+       include('voms::core::config')
+       include('voms::core::service')
+       Class[voms::core::install] -> Voms::Core[$name] -> Class[voms::core::service]
+
+      
+       firewall {"100 allow ${name} access from the universe.":
+           proto  => 'tcp',
+           dport  => $port,
+           action => 'accept'
+       }
 
        file{"/etc/voms/${vo}":
-         ensure  => directory,
-         mode    => "0755",
-         owner   => "root",
-         group   => "root",
-         purge   => true,
-         recurse  => true,
-         require => File['/etc/voms']
+           ensure  => directory,
+           mode    => "0755",
+           owner   => "root",
+           group   => "root",
+           purge   => true,
+           recurse => true,
+           require => File['/etc/voms']
        }
 
        file{"/etc/voms/${vo}/voms.conf":
@@ -90,7 +103,7 @@ define voms::core($vo=$name,
           require       => Class['mysql::server']
        }
        @@database_grant{"${sqlusername}@${::fqdn}/${sqldbname}":
-          tag           => 'voms_database_grant',
-          privileges    => ['Select_priv']
+          tag        => 'voms_database_grant',
+          privileges => ['Select_priv']
        }
 }

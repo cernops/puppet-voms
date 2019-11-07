@@ -4,6 +4,9 @@
 # 
 # === Parameters
 # 
+# [*hostname*]
+#  The hostname of the voms-admin instance. By default it is the $::fqdn.
+#
 # [*vo*]
 #  The name of virtual orgnisation. If not defined the namevar of the voms::admin intance will be used.
 # 
@@ -67,50 +70,60 @@ define voms::admin($vo=$name,
                    $mailfrom,
                    $mailsmtp='localhost',
                    $sqlpwd,
+                   $passfile=$vo ? {
+                    ''      => "/etc/voms/${name}/voms.pass",
+                    default => "/etc/voms/${vo}/voms.pass"
+                   },
+                   $disable_registration,
+                   $disable_notification,
                    $config_hash = {} ) {
 
-       ensure_resource('class','voms::admin::install')
-       ensure_resource('class','voms::admin::config')
-       ensure_resource('class','voms::admin::service')
-       Class[Voms::Admin::Install] -> Class[Voms::Admin::Config] -> Voms::Admin[$vo] -> Class[Voms::Admin::Service]
+       include('voms::admin::install')
+       include('voms::admin::config')
+       include('voms::admin::service')
+       Class[Voms::Admin::Install] -> Class[Voms::Admin::Config] -> Voms::Admin[$name] -> Class[Voms::Admin::Service]
 
 
        file{"/etc/voms-admin-puppet/voms-admin-add-admin-${vo}.sh":
-           ensure => file,
-           content => template("voms/voms-admin-add-admin.sh.erb"),
-           mode    => "0700",
+           ensure  => file,
+           content => template('voms/voms-admin-add-admin.sh.erb'),
+           mode    => '0700',
        }
 
 
        file{"/etc/voms-admin-puppet/voms-admin-remove-${vo}.sh":
-           ensure => file,
-           content => template("voms/voms-admin-remove.sh.erb"),
-           mode    => "0700",
+           ensure  => file,
+           content => template('voms/voms-admin-remove.sh.erb'),
+           mode    => '0700',
        }
 
        file{"/etc/voms-admin-puppet/voms-admin-create-${vo}.sh":
-           ensure => file,
-           content => template("voms/voms-admin-create.sh.erb"),
-           mode    => "0700",
+           ensure  => file,
+           content => template('voms/voms-admin-create.sh.erb'),
+           mode    => '0700',
        }
 
        file{"/etc/voms-admin-puppet/voms-admin-upgrade-${vo}.sh":
-           ensure => file,
-           content => template("voms/voms-admin-upgrade.sh.erb"),
-           mode    => "0700",
+           ensure  => file,
+           content => template('voms/voms-admin-upgrade.sh.erb'),
+           mode    => '0700',
        }
 
+
        file{"/etc/voms-admin-puppet/voms-admin-install-${vo}.sh":
-           ensure => file,
-           content => template("voms/voms-admin-install.sh.erb"),
-           mode    => "0700",
-           notify  => Exec["/etc/voms-admin-puppet/voms-admin-install-${vo}.sh"]
+           ensure  => file,
+           content => template('voms/voms-admin-install.sh.erb'),
+           mode    => '0700',
+           notify  => Exec["/etc/voms-admin-puppet/voms-admin-install-${vo}.sh"],
+           require => Class['fetchcrl']
        }
 
        exec{"/etc/voms-admin-puppet/voms-admin-install-${vo}.sh":
            refreshonly => true,
-           notify      => Service['voms-admin']
+           require     => [File['/etc/grid-security/vomskey.pem'],File['/etc/grid-security/vomscert.pem']],
+           notify      => Service['voms-admin'],
        }
+
 
        # We need a newer proprties.aug file than SLC5 or 6 provide
        # Can be dropped hopefully at a later date providing
@@ -129,17 +142,15 @@ define voms::admin($vo=$name,
    changes: set "<%= k %>" "<%= v %>"
    load_path: <%= @lenspath %>
    require: Exec[/etc/voms-admin-puppet/voms-admin-install-<%= @vo %>.sh]
-   notify: Service[tomcat]
 
 <% end -%>
         ')
 
      $aughash = parseyaml($augyaml)
    
-     create_resources('augeas',$aughash)
-
-
-
+     if $aughash {
+       create_resources('augeas',$aughash)
+     }
 
        @@database_user{"${sqlusername}@${::fqdn}":
           tag           => 'voms_database_users',
@@ -147,8 +158,8 @@ define voms::admin($vo=$name,
           require       => Class['mysql::server']
        }
        @@database_grant{"${sqlusername}@${::fqdn}/${sqldbname}":
-          tag           => 'voms_database_grant',
-          privileges    => ['Select_priv','Insert_priv','Update_priv','Alter_Priv','Create_Priv']
+          tag        => 'voms_database_grant',
+          privileges => ['Select_priv','Insert_priv','Update_priv','Alter_Priv','Create_Priv']
        }
 }
 

@@ -1,18 +1,19 @@
 {
-  "name": "rocha-voms",
-  "version": "0.1.0",
-  "summary": "Resources for managing a gLite Virtual Organization Membership Service (VOMS) client and server installation",
-  "author": "rocha",
-  "description": "This modules provides classes and definitions required to manage and properly configure a gLite service or client supporting authorization using the gLite Virtual Organization Membership Service (VOMS).",
+  "author": "CERNOps",
   "dependencies": [
     {
       "name": "puppetlabs/stdlib",
-      "version_requirement": "\u003e\u003d2.2.1"
+      "version_requirement": "\u003e\u003d 2.0.0"
     }
   ],
-  "types": [],
-  "checksums": {},
-  "source": "git://github.com/rochaporto/puppet-voms.git",
-  "project_page": "http://glite.org",
-  "license": "Apache License, Version 2.0 (the \"License\")"
+  "description": "This modules provides classes and definitions required to manage and properly configure a gLite service or client supporting authorization using the gLite Virtual Organization Membership Service (VOMS).",
+  "license": "Apache-2.0",
+  "name": "lcgdm-voms",
+  "operatingsystem_support": [],
+  "project_page": "https://github.com/cern-it-sdc-id/puppet-voms",
+  "requirements": [],
+  "source": "https://github.com/cern-it-sdc-id/puppet-voms",
+  "summary": "Resources for managing a gLite Virtual Organization Membership Service (VOMS) client and server installation'",
+  "tags": [],
+  "version": "0.3.3"
 }
