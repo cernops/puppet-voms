@@ -1,0 +1,19 @@
+{
+  "author": "CERNOps",
+  "dependencies": [
+    {
+      "name": "puppetlabs/stdlib",
+      "version_requirement": "\u003e\u003d 2.0.0"
+    }
+  ],
+  "description": "This modules provides classes and definitions required to manage and properly configure a gLite service or client supporting authorization using the gLite Virtual Organization Membership Service (VOMS).",
+  "license": "Apache-2.0",
+  "name": "lcgdm-voms",
+  "operatingsystem_support": [],
+  "project_page": "https://github.com/hep-puppet/puppet-voms",
+  "requirements": [],
+  "source": "https://github.com/hep-puppet/puppet-voms",
+  "summary": "Resources for managing a gLite Virtual Organization Membership Service (VOMS) client and server installation'",
+  "tags": [],
+  "version": "0.3.3"
+}

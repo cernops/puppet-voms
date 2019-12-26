@@ -6,13 +6,5 @@ class voms::core::install (
       ensure => present,
       before => File['/etc/voms']
    }
-   file{'/etc/voms':
-         ensure  => directory,
-         mode    => '0755',
-         owner   => 'root',
-         group   => 'root',
-         purge   => true,
-         recurse => true
-   }
 
 }
