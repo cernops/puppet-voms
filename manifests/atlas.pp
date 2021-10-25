@@ -12,6 +12,7 @@
 #
 # CERN IT/GT/DMS <it-dep-gt-dms@cern.ch>
 # CERN IT/PS/PES <it-dep-ps-pes@cern.ch>
+# Adam Boutcher IPPP, Durham University <adam.j.boutcher@durham.ac.uk>
 
 class voms::atlas {
   voms::client{'atlas':
@@ -24,6 +25,11 @@ class voms::atlas {
                     port   => '15001',
                     dn    => '/DC=ch/DC=cern/OU=computers/CN=lcg-voms.cern.ch',
                     ca_dn => '/DC=ch/DC=cern/CN=CERN Trusted Certification Authority'
+                   },
+                   {server => 'voms-atlas-auth.app.cern.ch',
+                    port   => '0',
+                    dn     => '/DC=ch/DC=cern/OU=computers/CN=atlas-auth.web.cern.ch',
+                    ca_dn  => '/DC=ch/DC=cern/CN=CERN Grid Certification Authority'
                    }]
  }
 }
