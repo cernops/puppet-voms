@@ -11,7 +11,8 @@
 
 # [*servers*]
 #   An array of hashes. For each VOMS server 
-#   specify server name (server), its port (port), 
+#   specify server name (server), its port (port) - 0 (Zero)
+#   indicates an IAM auth not voms,
 #   its distinguished name (dn) and it's certificate 
 #   authority distinguished name (ca_dn) as keys to the hash.
 
@@ -27,12 +28,19 @@
 #                   port   => '15009',
 #                   dn    => '/DC=ch/DC=cern/OU=computers/CN=lcg-voms.cern.ch',
 #                   ca_dn => '/DC=ch/DC=cern/CN=CERN Trusted Certification Authority'
+#                  },
+#                  {server => 'lcg-voms-auth.app.cern.ch',
+#                   port   => '443',
+#                   dn    => '/DC=ch/DC=cern/OU=computers/CN=lcg-voms-app.web.cern.ch',
+#                   ca_dn => '/DC=ch/DC=cern/CN=CERN Trusted Certification Authority',
+#                   iam   => true
 #                  }]
 #
 # == Authors
 #
 # CERN IT/GT/DMS <it-dep-gt-dms@cern.ch>
 # CERN IT/PES/PS <it-dep-pes-ps@cern.ch>
+# Adam Boutcher IPPP, Durham University <adam.j.boutcher@durham.ac.uk>
 #
 define voms::client ($vo = $name, $servers = []  ) {
    ensure_resource('class','voms::install')
@@ -63,9 +71,15 @@ define voms::client ($vo = $name, $servers = []  ) {
    content: "<%= s["dn"] %>\n<%= s["ca_dn"] %>\n"
    require: File[/etc/grid-security/vomsdir/<%= @vo %>]
 
+<% if s["port"] != "0" -%>
+<% if s["iam"] != true -%>
 /etc/vomses/<%= @vo %>-<%= s["server"] %>:
+<% else -%>
+/etc/vomses/<%= s["server"] %>.vomses:
+<% end -%>
    content: "\"<%= @vo %>\" \"<%= s["server"] %>\" \"<%= s["port"] %>\" \"<%= s["dn"] %>\" \"<%= @vo %>\" \"24\"\n"
    require: File[/etc/vomses]
+<% end -%>
 
 <% end -%>
 
