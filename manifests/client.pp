@@ -30,9 +30,10 @@
 #                   ca_dn => '/DC=ch/DC=cern/CN=CERN Trusted Certification Authority'
 #                  },
 #                  {server => 'lcg-voms-auth.app.cern.ch',
-#                   port   => '0',
+#                   port   => '443',
 #                   dn    => '/DC=ch/DC=cern/OU=computers/CN=lcg-voms-app.web.cern.ch',
-#                   ca_dn => '/DC=ch/DC=cern/CN=CERN Trusted Certification Authority'
+#                   ca_dn => '/DC=ch/DC=cern/CN=CERN Trusted Certification Authority',
+#                   iam   => true
 #                  }]
 #
 # == Authors
@@ -71,7 +72,11 @@ define voms::client ($vo = $name, $servers = []  ) {
    require: File[/etc/grid-security/vomsdir/<%= @vo %>]
 
 <% if s["port"] != "0" -%>
+<% if s["iam"] != true -%>
 /etc/vomses/<%= @vo %>-<%= s["server"] %>:
+<% else -%>
+/etc/vomses/<%= s["server"] %>.vomses:
+<% end -%>
    content: "\"<%= @vo %>\" \"<%= s["server"] %>\" \"<%= s["port"] %>\" \"<%= s["dn"] %>\" \"<%= @vo %>\" \"24\"\n"
    require: File[/etc/vomses]
 <% end -%>
